@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Drawing app</title>
+  </head>
+  <body>
+    <section class="container">
+      <div id="toolbar">
+        <h1>Draw.</h1>
+        <label for="stroke">Stroke</label>
+        <input id="stroke" name="stroke" type="color" />
+        <label for="lineWidth">Line Width</label>
+        <input id="lineWidth" name="lineWidth" type="number" value="5" />
+        <input type="range" id="alpha" min="0" max="1" step="0.1" value="1" />
+        <button id="eraser">Eraser <i class="fa fa-eraser"></i></button>
+        <button id="clear" class="tlbBtn">Clear</button>
+        <button id="prev" class="tlbBtn">Previous</button>
+        <button id="next" class="tlbBtn">Next</button>
+        <button id="zoomIn" class="tlbBtn">++</button>
+        <button id="zoomOut" class="tlbBtn">--</button>
+        <span
+          >Page: <span id="page_num"></span> /
+          <span id="page_count"> </span> </span
+        ><br />
+        <form id="form">
+          <input
+            class="file-select"
+            type="file"
+            name="fileupload"
+            value="fileupload"
+            id="fileupload"
+          />
+          <label for="fileupload"> Select a file</label>
+          <input class="file-submit" type="submit" value="submit" />
+        </form>
+      </div>
+
+      <div class="drawing-board">
+        <canvas
+          id="pdf-board"
+          class="layer1"
+          style="position: absolute; left: 79px; top: 0; z-index: 0"
+        ></canvas>
+        <canvas
+          id="drawing-slate"
+          class="layer2"
+          style="position: absolute; left: 79px; top: 0; z-index: 1"
+        ></canvas>
+        <canvas
+          id="temp-slate"
+          class="layer3"
+          style="position: absolute; left: 79px; top: 0; z-index: 2"
+        ></canvas>
+      </div>
+    </section>
+
+    <script src="./script.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"
+      integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </body>
+</html>
