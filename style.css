@@ -58,7 +58,12 @@ h1 {
 }
 
 .crosshair {
-  cursor: crosshair;
+  /* cursor: crosshair; */
+  cursor: url(./Eraser.cur), pointer;
+}
+
+.pencil {
+  cursor: url(./Pencil.cur), pointer;
 }
 
 .blue {

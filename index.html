@@ -17,7 +17,21 @@
         <label for="stroke">Stroke</label>
         <input id="stroke" name="stroke" type="color" />
         <label for="lineWidth">Line Width</label>
-        <input id="lineWidth" name="lineWidth" type="number" value="5" />
+        <!-- <input id="lineWidth" name="lineWidth" type="number" value="5" /> -->
+
+        <select name="lineWidth" id="lineWidth">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+          <option value="35">35</option>
+          <option value="40">40</option>
+          <option value="45">45</option>
+          <option value="50">50</option>
+        </select>
+
         <input type="range" id="alpha" min="0" max="1" step="0.1" value="1" />
         <button id="eraser">Eraser <i class="fa fa-eraser"></i></button>
         <button id="clear" class="tlbBtn">Clear</button>
@@ -55,7 +69,7 @@
         ></canvas>
         <canvas
           id="temp-slate"
-          class="layer3"
+          class="layer3 pencil"
           style="position: absolute; left: 79px; top: 0; z-index: 2"
         ></canvas>
       </div>

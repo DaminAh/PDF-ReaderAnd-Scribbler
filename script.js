@@ -1,3 +1,5 @@
+//canvas variable
+
 const pdfBoard = document.getElementById("pdf-board");
 const drawingSlate = document.getElementById("drawing-slate");
 const tempSlate = document.getElementById("temp-slate");
@@ -31,19 +33,24 @@ let lineWidth = 5;
 let startX;
 let startY;
 
+//toolbar variables
 let strokeInput = document.getElementById("stroke");
 let lineInput = document.getElementById("lineWidth");
 let alphaInput = document.getElementById("alpha");
 let eraser = document.getElementById("eraser");
 let tlbBtns = document.querySelectorAll(".tlbBtn");
+let alphaChannelValue = alphaInput.value;
+let alphatemp = null;
+
+//pdfjs variables
 let pdfDoc = null;
 let numPages = null;
 let pageNum = 1;
 let pageRendering = false;
 let pageNumPending = null;
 let scale = 1.5;
-let alphaChannelValue = alphaInput.value;
 
+//misc variables
 //misc variables
 let preScaledImg;
 let imgElm = new Image();
@@ -78,20 +85,27 @@ eraser.addEventListener("click", () => {
 
 function eraserLogic() {
   if (eraserOff) {
+    alphatemp = alphaChannelValue;
+    alphaInput.disabled = true;
+    console.log("alpha temp: ", alphatemp);
+    settingAlphaChannels(1);
     eraserOff = false;
     switchIndex();
     ctxSlate.globalCompositeOperation = "destination-out";
     for (let btn of tlbBtns) {
-      console.log(btn);
+      // console.log(btn);
       btn.disabled = true;
       btn.classList.toggle("grey");
     }
   } else {
+    alphaInput.disabled = false;
     eraserOff = true;
     ctxSlate.globalCompositeOperation = "source-over";
     switchIndex();
+    console.log("alpha temp: ", alphatemp);
+    settingAlphaChannels(alphatemp);
     for (let btn of tlbBtns) {
-      console.log(btn);
+      // console.log(btn);
       btn.disabled = false;
       btn.classList.toggle("grey");
     }
@@ -127,10 +141,11 @@ toolbar.addEventListener("change", (e) => {
 alphaInput.addEventListener("change", () => {
   alphaChannelValue = alphaInput.value;
   console.log("calling settingAlphaChannels()");
-  settingAlphaChannels();
+  settingAlphaChannels(alphaChannelValue);
 });
 
-function settingAlphaChannels() {
+function settingAlphaChannels(value) {
+  alphaChannelValue = value;
   tempSlate.style.opacity = alphaChannelValue;
   ctxSlate.globalAlpha = alphaChannelValue;
   console.log("setting alpha channels to = ", alphaChannelValue);
@@ -190,6 +205,7 @@ drawingSlate.addEventListener("mousedown", (e) => {
   slatePainting = true;
   startX = e.clientX;
   startY = e.clientY;
+  ctxSlate.globalAlpha = alphaChannelValue;
   console.log("drawing slate mouse down");
 });
 
